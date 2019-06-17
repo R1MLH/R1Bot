@@ -134,6 +134,9 @@ async def on_message(message):
         embed.add_field(name="Cyberpunk 2077", value=datetime.datetime(2020, 4, 16) - datetime.datetime.now(), inline=True)
         embed.add_field(name="Eclipse totale du soleil en France", value=datetime.datetime(2081, 9, 3) - datetime.datetime.now(), inline=True)
         await client.send_message(message.channel, embed=embed)
+        
+     if "🦏" in message.content and "🐦" in message.content and "⚡" in message.content and "🐸" in message.content:
+        await client.send_file(message.channel, "/server/discord/R1Bot/boys.jpg")
 
 @client.event
 async def on_ready():
