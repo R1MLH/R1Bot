@@ -35,16 +35,20 @@ async def on_message(message):
                                   + r1)
 
     if message.content.startswith("!pirate"):
-        await client.send_file(message.channel, "/server/discord/R1Bot/pirate.png")
+        await client.send_file(message.channel,
+                               "/server/discord/R1Bot/pirate.png")
 
     if message.content.startswith("!heure"):
         clem = datetime.datetime.now(timezone('America/Montreal'))
         france = datetime.datetime.now(timezone('Europe/Paris'))
         suede = datetime.datetime.now(timezone('Europe/Stockholm'))
         embed = discord.Embed(title="Heure", color=0xdf0000)
-        embed.add_field(name="France", value=france.strftime('%H:%M'), inline=True)
-        embed.add_field(name="Québec", value=clem.strftime('%H:%M'), inline=True)
-        embed.add_field(name="Suède", value=suede.strftime('%H:%M'), inline=True)
+        embed.add_field(name="France", value=france.strftime('%H:%M'),
+                        inline=True)
+        embed.add_field(name="Québec", value=clem.strftime('%H:%M'),
+                        inline=True)
+        embed.add_field(name="Suède", value=suede.strftime('%H:%M'),
+                        inline=True)
         await client.send_message(message.channel, embed=embed)
 
     if message.content.startswith("!monnaie ") or message.content.startswith("!mon ") or message.content.startswith("!m ") or message.content.startswith("!écus ") or message.content.startswith("!ecus ") or message.content.startswith("!avoir ") or message.content.startswith("!bourse ") or message.content.startswith("!finance ") or message.content.startswith("!fonds ") or message.content.startswith("!galette ") or message.content.startswith("!pognon ") or message.content.startswith("!billet ") or message.content.startswith("!capital ") or message.content.startswith("!finances ") or message.content.startswith("!fortune ") or message.content.startswith("!recette ") or message.content.startswith("!blé ") or message.content.startswith("!espèces ") or message.content.startswith("!espèce ") or message.content.startswith("!flouze ") or message.content.startswith("!fric ") or message.content.startswith("!papier-monnaie ") or message.content.startswith("!trésor ") or message.content.startswith("!moneyzzz ") or message.content.startswith("!cash ") or message.content.startswith("!mitraille ") or message.content.startswith("!pèze ") or message.content.startswith("!radis ") or message.content.startswith("!grisbi ") or message.content.startswith("!pécule ") or message.content.startswith("!somme ") or message.content.startswith("!buck ") or message.content.startswith("!currency ") or message.content.startswith("!cabbage ") or message.content.startswith("!cheddar ") or message.content.startswith("!clams ") or message.content.startswith("!coins ") or message.content.startswith("!coin ") or message.content.startswith("!bucks ") or message.content.startswith("!bucks ") or message.content.startswith("!cheddar ") or message.content.startswith("!dime ") or message.content.startswith("!dough ") or message.content.startswith("!ducats ") or message.content.startswith("!fins ") or message.content.startswith("!greenbacks ") or message.content.startswith("!lettuce ") or message.content.startswith("!loot ") or message.content.startswith("!lucre ") or message.content.startswith("!moola ") or message.content.startswith("!nickel ") or message.content.startswith("!quarter ") or message.content.startswith("!sawbucks ") or message.content.startswith("!scratch ") or message.content.startswith("!shekels ") or message.content.startswith("!simoleons ") or message.content.startswith("!skrilla ") or message.content.startswith("!smackers ") or message.content.startswith("!spondulix ") or message.content.startswith("!stacks ") or message.content.startswith("!tenners ") or message.content.startswith("!wad ") or message.content.startswith("!wampum ") or message.content.startswith("!avoine ") or message.content.startswith("!artiche ") or message.content.startswith("!balles ") or message.content.startswith("!beurre ") or message.content.startswith("!bifton ") or message.content.startswith("!biftons ") or message.content.startswith("!grisbi ") or message.content.startswith("!carbure ") or message.content.startswith("!douille ") or message.content.startswith("!faf ") or message.content.startswith("!fafiots ") or message.content.startswith("!fourrage ") or message.content.startswith("!maille ") or message.content.startswith("!osier ") or message.content.startswith("!patate ") or message.content.startswith("!ronds ") or message.content.startswith("!thune ") or message.content.startswith("!talbin ") or message.content.startswith("!doublons ") or message.content.startswith("!doublon ") or message.content.startswith("!pépettes ") or message.content.startswith("!pépette ") or message.content.startswith("!green ") or message.content.startswith("!sou ") or message.content.startswith("!sous ") or message.content.startswith("!oseille ") or message.content.startswith("!pécune "):
@@ -97,15 +101,15 @@ async def on_message(message):
         embed.add_field(name="Cyberpunk 2077", value=datetime.datetime(2020, 4, 16) - datetime.datetime.now(), inline=True)
         embed.add_field(name="Eclipse totale du soleil en France", value=datetime.datetime(2081, 9, 3) - datetime.datetime.now(), inline=True)
         await client.send_message(message.channel, embed=embed)
-        
+
     if "🦏" in message.content and "🐦" in message.content and "⚡" in message.content and "🐸" in message.content:
         await client.send_file(message.channel, "/server/discord/R1Bot/boys.jpg")
+
 
 @client.event
 async def on_ready():
     await client.change_presence(game=Game(name="Half Life 3"))
     print("Prêt.")
-
 
 
 client.run(TOKEN)
