@@ -8,6 +8,7 @@ import time
 import datetime
 import requests
 import pickle
+import regex as re
 from pytz import timezone
 from discord import Game
 from discord.ext.commands import Bot
@@ -18,58 +19,20 @@ TOKEN = ""
 client = Bot(command_prefix=BOT_PREFIX)
 r1 = "<:R1:428141251120857109>"
 
+subregex = r"\/?\/[a-zA-Z]{2,20}\/?"
+
 
 @client.listen()
 async def on_message(message):
     if message.author.bot: return
     if message.content.find('http://') is not -1 or message.content.find('https://') is not -1: return
 
-    if ("/r/") in message.content:
-        if message.content.rindex('/r/') is not 0:
-            if message.content.find(' ', message.content.rindex('/r/')) is not -1:
-                if message.content[message.content.rindex('/r/'):message.content.find(' ', message.content.rindex('/r/'))].endswith('/'):
-                    await client.send_message(message.channel, r1 + ' https://old.reddit.com' + message.content[message.content.rindex('/r/'):message.content.find(' ',message.content.rindex('/r/'))] + 'top/?sort=top&t=all ' + r1)
-                else:
-                    await client.send_message(message.channel, r1 + ' https://old.reddit.com' + message.content[message.content.rindex('/r/'):message.content.find(' ', message.content.rindex('/r/'))] + '/top/?sort=top&t=all ' + r1)
-            else:
-                if message.content[message.content.rindex('/r/'):len(message.content)].endswith('/'):
-                    await client.send_message(message.channel, r1 + ' https://old.reddit.com' + message.content[message.content.rindex('/r/'):len(message.content)] + 'top/?sort=top&t=all ' + r1)
-                else:
-                    await client.send_message(message.channel, r1 + ' https://old.reddit.com' + message.content[message.content.rindex('/r/'):len(message.content)] + '/top/?sort=top&t=all ' + r1)
-        else:
-            if message.content.find(' ') is not -1:
-                if message.content[:message.content.find(' ')].endswith('/'):
-                    await client.send_message(message.channel, r1 + ' https://old.reddit.com' + message.content[:message.content.find(' ')] + 'top/?sort=top&t=all ' + r1)
-                else:
-                    await client.send_message(message.channel, r1 + ' https://old.reddit.com' + message.content[:message.content.find(' ')] + '/top/?sort=top&t=all ' + r1)
-            else:
-                if message.content.endswith('/'):
-                    await client.send_message(message.channel, r1 + ' https://old.reddit.com' + message.content[:len(message.content)] + 'top/?sort=top&t=all ' + r1)
-                else:
-                    await client.send_message(message.channel, r1 + ' https://old.reddit.com' + message.content[:len(message.content)] + '/top/?sort=top&t=all ' + r1)
-    elif ("r/") in message.content:
-        if message.content.rindex('r/') is not 0:
-            if message.content.find(' ', message.content.rindex('r/')) is not -1:
-                if message.content[message.content.rindex('r/'):message.content.find(' ', message.content.rindex('r/'))].endswith('/'):
-                    await client.send_message(message.channel, r1 + ' https://old.reddit.com/' + message.content[message.content.rindex('r/'):message.content.find(' ',message.content.rindex('r/'))] + 'top/?sort=top&t=all ' + r1)
-                else:
-                    await client.send_message(message.channel, r1 + ' https://old.reddit.com/' + message.content[message.content.rindex('r/'):message.content.find(' ', message.content.rindex('r/'))] + '/top/?sort=top&t=all ' + r1)
-            else:
-                if message.content[message.content.rindex('r/'):len(message.content)].endswith('/'):
-                    await client.send_message(message.channel, r1 + ' https://old.reddit.com/' + message.content[message.content.rindex('r/'):len(message.content)] + 'top/?sort=top&t=all ' + r1)
-                else:
-                    await client.send_message(message.channel, r1 + ' https://old.reddit.com/' + message.content[message.content.rindex('r/'):len(message.content)] + '/top/?sort=top&t=all ' + r1)
-        else:
-            if message.content.find(' ') is not -1:
-                if message.content[:message.content.find(' ')].endswith('/'):
-                    await client.send_message(message.channel, r1 + ' https://old.reddit.com/' + message.content[:message.content.find(' ')] + 'top/?sort=top&t=all ' + r1)
-                else:
-                    await client.send_message(message.channel, r1 + ' https://old.reddit.com/' + message.content[:message.content.find(' ')] + '/top/?sort=top&t=all ' + r1)
-            else:
-                if message.content.endswith('/'):
-                    await client.send_message(message.channel, r1 + ' https://old.reddit.com/' + message.content[:len(message.content)] + 'top/?sort=top&t=all ' + r1)
-                else:
-                    await client.send_message(message.channel, r1 + ' https://old.reddit.com/' + message.content[:len(message.content)] + '/top/?sort=top&t=all ' + r1)
+    for subreddit in re.findall(subregex, message.content):
+        processedSub = subreddit.replace("/", "")[1:]
+        await client.send_message(message.channel,
+                                  r1 + ' https://old.reddit.com/r/'
+                                  + processedSub + '/top/?sort=top&t=all '
+                                  + r1)
 
     if message.content.startswith("!pirate"):
         await client.send_file(message.channel, "/server/discord/R1Bot/pirate.png")
