@@ -1,0 +1,14 @@
+#file with all the dates for the hype commands
+---
+-
+  name: "Star Wars Jedi: Fallen Order"
+  date: [2019, 11, 15]
+-
+  name: "Cyberpunk 2077"
+  date: [2020, 4, 16]
+-
+  name: "Eclipse totale du soleil en France"
+  date: [2081, 9, 3]
+-
+  name: "Monster Hunter Iceborne"
+  date: [2019, 9, 6]

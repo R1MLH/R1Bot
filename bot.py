@@ -4,6 +4,7 @@ import asyncio
 import aiohttp
 import json
 import discord
+import yaml
 import time
 import datetime
 import requests
@@ -92,14 +93,10 @@ async def on_message(message):
 
     if message.content.startswith("!hype"):
         embed = discord.Embed(title="Dates à venir", color=0xff1111, url="http://www.jeuxvideo.com/news/1025856/e3-2019-dates-horaires-toutes-les-infos-sur-les-conferences.htm")
-        embed.add_field(name="E3 : Conférence Ubisoft", value=datetime.datetime(2019, 6, 10, 21) - datetime.datetime.now(), inline=True)
-        embed.add_field(name="E3 : Conférence Limited Run Games", value=datetime.datetime(2019, 6, 10, 21) - datetime.datetime.now(), inline=True)
-        embed.add_field(name="E3 : Kinda Funny Games Showcase", value=datetime.datetime(2019, 6, 11, 1, 30) - datetime.datetime.now(), inline=True)
-        embed.add_field(name="E3 : Conférence Square Enix", value=datetime.datetime(2019, 6, 11, 3) - datetime.datetime.now(), inline=True)
-        embed.add_field(name="E3 : Conférence Nintendo", value=datetime.datetime(2019, 6, 11, 18) - datetime.datetime.now(), inline=True)
-        embed.add_field(name="Star Wars Jedi: Fallen Order", value=datetime.datetime(2019, 11, 15) - datetime.datetime.now(), inline=True)
-        embed.add_field(name="Cyberpunk 2077", value=datetime.datetime(2020, 4, 16) - datetime.datetime.now(), inline=True)
-        embed.add_field(name="Eclipse totale du soleil en France", value=datetime.datetime(2081, 9, 3) - datetime.datetime.now(), inline=True)
+        with open('/server/discord/R1Bot/hype.yaml', 'r') as f:
+            hypester = yaml.load(f, Loader=yaml.FullLoader)
+        for hype in hypester:
+            embed.add_field(name=hype['name'], value=datetime.datetime(*hype['date']) - datetime.datetime.now(), inline=True)
         await client.send_message(message.channel, embed=embed)
 
     if "🦏" in message.content and "🐦" in message.content and "⚡" in message.content and "🐸" in message.content:
