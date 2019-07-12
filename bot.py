@@ -20,7 +20,7 @@ TOKEN = ""
 client = Bot(command_prefix=BOT_PREFIX)
 r1 = "<:R1:428141251120857109>"
 
-subregex = r"\/?\/[a-zA-Z]{2,20}\/?"
+subregex = r"\/?r\/[a-zA-Z]{2,20}\/?"
 
 
 @client.listen()
